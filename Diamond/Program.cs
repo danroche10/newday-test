@@ -4,7 +4,6 @@
 	{
 		public static void Main()
 		{
-
 			try
 			{
 				string diamond = Diamond.Create('Z');

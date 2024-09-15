@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\dan-roche-newday-test\Diamond.csproj" />
+    <ProjectReference Include="..\Diamond\Diamond.csproj" />
   </ItemGroup>
 
 </Project>
