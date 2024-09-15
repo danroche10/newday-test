@@ -1,3 +1,5 @@
+using Xunit;
+
 namespace Diamond.Tests
 {
 	public class DiamondTests
