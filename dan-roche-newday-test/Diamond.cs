@@ -8,12 +8,13 @@ namespace Diamond
 	{
 		public static string Create(char inputCharacter)
 		{
+			if (inputCharacter == 'A')
+				return "A";
+			
 			int inputCharacterAlphabetPosition = char.ToLower(inputCharacter) - 'a' + 1;
-			StringBuilder outputString = new StringBuilder(string.Empty);
+			StringBuilder outputString = new StringBuilder();
 
 			CreateTopHalfOfDiamond(outputString, inputCharacterAlphabetPosition);
-
-			CreateBottomHalfOfDiamond(outputString, inputCharacterAlphabetPosition);
 			
 			return outputString.ToString();
 		}
@@ -22,25 +23,31 @@ namespace Diamond
 		{
 			for (int i = 0; i < inputCharacterAlphabetPosition; i++)
 			{
+				int squareSideLength = (inputCharacterAlphabetPosition * 2) - 1;
+				int diamondTopPosition = squareSideLength / 2;
 				char letter = char.ToUpper((char)('a' + i));
 
-				if (outputString.Length > 0 && letter != outputString[i - 1])
-					outputString.Append('\n');
-
-				outputString.Append(letter);
-			}
-		}
-		
-		private static void CreateBottomHalfOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition)
-		{
-			for (int i = inputCharacterAlphabetPosition - 1; i >= 0; i--)
-			{
-				char letter = char.ToUpper((char)('a' + i));
-
-				if (i < inputCharacterAlphabetPosition - 1 && letter != outputString[i + 1])
-					outputString.Append("\n");
-
-				outputString.Append(letter);
+                if (i == 0)
+                {
+                    for (int position = 0; position < squareSideLength; position++)
+		            {
+						if (position == diamondTopPosition)
+							outputString.Append(letter);
+						else
+							outputString.Append(' ');
+					}
+				}	
+				else
+				{
+					for (int position = 0; position < squareSideLength; position++)
+					{
+						if (position == diamondTopPosition + i || position == diamondTopPosition - i)
+							outputString.Append(letter);
+						else
+							outputString.Append(' ');
+					}
+				}
+				outputString.Append('\n');
 			}
 		}
 	}
