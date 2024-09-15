@@ -1,6 +1,4 @@
-﻿using System.Data;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Text;
 
 namespace Diamond
 {
@@ -12,16 +10,17 @@ namespace Diamond
 				return "A";
 			
 			int inputCharacterAlphabetPosition = char.ToLower(inputCharacter) - 'a' + 1;
+			int squareSideLength = (inputCharacterAlphabetPosition * 2) - 1;
 			StringBuilder outputString = new StringBuilder();
 
-			CreateTopHalfOfDiamond(outputString, inputCharacterAlphabetPosition);
+			CreateTopOfDiamond(outputString, inputCharacterAlphabetPosition, squareSideLength);
+			CreateBottomOfDiamond(outputString, inputCharacterAlphabetPosition, squareSideLength);
 			
 			return outputString.ToString();
 		}
 
-		private static void CreateTopHalfOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition)
+		private static void CreateTopOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition, int squareSideLength)
 		{
-			int squareSideLength = (inputCharacterAlphabetPosition * 2) - 1;
 			for (int i = 0; i < inputCharacterAlphabetPosition; i++)
 			{
 				int diamondTopPosition = squareSideLength / 2;
@@ -49,11 +48,14 @@ namespace Diamond
 				}
 				outputString.Append('\n');
 			}
+		}
 
-			for (int i = inputCharacterAlphabetPosition - 2; i >=0; i--) 
+		private static void CreateBottomOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition, int squareSideLength)
+		{
+			for (int i = inputCharacterAlphabetPosition - 2; i >= 0; i--)
 			{
 				if (i == 0)
-	            {
+				{
 					string newRow = outputString.ToString().Substring(0, squareSideLength);
 					outputString.Append(newRow);
 				}
