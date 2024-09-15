@@ -1,80 +1,60 @@
-﻿using System.Diagnostics.Metrics;
-using System.Text;
+﻿using System.Text;
 
 namespace Diamond
 {
 	public class Diamond
 	{
-		public static string Create(char inputCharacter)
+		public static string Create(char targetLetter)
 		{
-			if (inputCharacter == 'A')
+			if (!char.IsLetter(targetLetter) || !char.IsUpper(targetLetter))
+				throw new ArgumentException("Input must be an uppercase letter from A to Z.");
+			
+			if (targetLetter == 'A')
 				return "A";
 			
-			int inputCharacterAlphabetPosition = char.ToLower(inputCharacter) - 'a' + 1;
-			int squareSideLength = (inputCharacterAlphabetPosition * 2) - 1;
-			StringBuilder outputString = new StringBuilder();
+			int letterPosition = char.ToUpper(targetLetter) - 'A';
+			int diamondWidth = (letterPosition * 2) + 1;
+			StringBuilder diamond = new StringBuilder();
 
-			CreateTopOfDiamond(outputString, inputCharacterAlphabetPosition, squareSideLength);
-			CreateBottomOfDiamond(outputString, inputCharacterAlphabetPosition, squareSideLength);
+			CreateTopOfDiamond(diamond, letterPosition, diamondWidth);
+			CreateBottomOfDiamond(diamond, letterPosition, diamondWidth);
 			
-			return outputString.ToString();
+			return diamond.ToString();
 		}
 
-		private static void CreateTopOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition, int squareSideLength)
+		private static void CreateTopOfDiamond(StringBuilder diamond, int inputCharacterAlphabetPosition, int diamondWidth)
 		{
-			for (int rowNumber = 0; rowNumber < inputCharacterAlphabetPosition; rowNumber++)
+			for (int row = 0; row <= inputCharacterAlphabetPosition; row++)
 			{
-				int diamondTopPosition = squareSideLength / 2;
-				char letter = char.ToUpper((char)('a' + rowNumber));
-
-                if (rowNumber == 0)
-                {
-					CreateTopRow(outputString, letter, squareSideLength, diamondTopPosition);
-				}	
-				else
-				{
-					CreateTopOfDiamondNonARows(outputString, letter, squareSideLength, diamondTopPosition, rowNumber);
-				}
-				outputString.Append('\n');
-			}
-		}
-		
-		private static void CreateTopOfDiamondNonARows(StringBuilder outputString, char letter, int squareSideLength, int diamondTopPosition, int rowNumber)
-		{
-			for (int position = 0; position < squareSideLength; position++)
-			{
-				if (position == diamondTopPosition + rowNumber || position == diamondTopPosition - rowNumber)
-					outputString.Append(letter);
-				else
-					outputString.Append(' ');
+				char currentChar = (char)('A' + row);
+				int middlePosition = diamondWidth / 2;
+			
+				AppendDiamondRow(diamond, currentChar, middlePosition - row, middlePosition + row, diamondWidth);
+				diamond.Append('\n');
 			}
 		}
 
-		private static void CreateTopRow(StringBuilder outputString, char letter, int squareSideLength, int diamondTopPosition)
+		private static void CreateBottomOfDiamond(StringBuilder diamond, int letterPosition, int diamondWidth)
 		{
-			for (int position = 0; position < squareSideLength; position++)
+			for (int row = letterPosition - 1; row >= 0; row--)
 			{
-				if (position == diamondTopPosition)
-					outputString.Append(letter);
-				else
-					outputString.Append(' ');
+				char currentChar = (char)('A' + row);
+				int middlePosition = diamondWidth / 2;
+
+				AppendDiamondRow(diamond, currentChar, middlePosition - row, middlePosition + row, diamondWidth);
+                
+				if (row > 0) diamond.Append('\n');
 			}
 		}
 
-		private static void CreateBottomOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition, int squareSideLength)
+		private static void AppendDiamondRow(StringBuilder diamond, char letter, int leftPositon, int rightPositon, int diamondWidth) 
 		{
-			for (int i = inputCharacterAlphabetPosition - 2; i >= 0; i--)
+			for (int pos = 0; pos < diamondWidth; pos++) 
 			{
-				if (i == 0)
-				{
-					string newRow = outputString.ToString().Substring(0, squareSideLength);
-					outputString.Append(newRow);
-				}
+				if (pos == leftPositon || pos == rightPositon)
+					diamond.Append(letter);
 				else
-				{
-					string newRow = outputString.ToString().Substring((i * squareSideLength) + i, squareSideLength);
-					outputString.Append(newRow + "\n");
-				}
+					diamond.Append(' ');	
 			}
 		}
 	}

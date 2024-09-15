@@ -38,5 +38,15 @@ namespace Diamond.Tests
 			// Assert
 			Assert.Equal(expectedOutput, output);
 		}
+
+		[Theory]
+		[InlineData('a')]
+		[InlineData('1')]
+		[InlineData('%')]
+		public void Create_Should_Throw_Exception_For_Invalid_Input(char invalidInput)
+		{
+			// Act & Assert
+			Assert.Throws<ArgumentException>(() => Diamond.Create(invalidInput));
+		}
 	}
 }
