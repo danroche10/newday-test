@@ -21,9 +21,9 @@ namespace Diamond
 
 		private static void CreateTopHalfOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition)
 		{
+			int squareSideLength = (inputCharacterAlphabetPosition * 2) - 1;
 			for (int i = 0; i < inputCharacterAlphabetPosition; i++)
 			{
-				int squareSideLength = (inputCharacterAlphabetPosition * 2) - 1;
 				int diamondTopPosition = squareSideLength / 2;
 				char letter = char.ToUpper((char)('a' + i));
 
@@ -48,6 +48,20 @@ namespace Diamond
 					}
 				}
 				outputString.Append('\n');
+			}
+
+			for (int i = inputCharacterAlphabetPosition - 2; i >=0; i--) 
+			{
+				if (i == 0)
+	            {
+					string newRow = outputString.ToString().Substring(0, squareSideLength);
+					outputString.Append(newRow);
+				}
+				else
+				{
+					string newRow = outputString.ToString().Substring((i * squareSideLength) + i, squareSideLength);
+					outputString.Append(newRow + "\n");
+				}
 			}
 		}
 	}

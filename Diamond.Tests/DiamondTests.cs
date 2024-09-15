@@ -26,7 +26,7 @@ namespace Diamond.Tests
         	string output = Diamond.Create(input);
 
 			// Assert
-			string expectedOutput =  "  A  \n B B \nC   C\n";
+			string expectedOutput = "  A  \n B B \nC   C\n B B \n  A  ";
 			
 			Assert.Equal(expectedOutput, output);
 		}
