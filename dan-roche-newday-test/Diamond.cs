@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.Metrics;
+using System.Text;
 
 namespace Diamond
 {
@@ -21,32 +22,42 @@ namespace Diamond
 
 		private static void CreateTopOfDiamond(StringBuilder outputString, int inputCharacterAlphabetPosition, int squareSideLength)
 		{
-			for (int i = 0; i < inputCharacterAlphabetPosition; i++)
+			for (int rowNumber = 0; rowNumber < inputCharacterAlphabetPosition; rowNumber++)
 			{
 				int diamondTopPosition = squareSideLength / 2;
-				char letter = char.ToUpper((char)('a' + i));
+				char letter = char.ToUpper((char)('a' + rowNumber));
 
-                if (i == 0)
+                if (rowNumber == 0)
                 {
-                    for (int position = 0; position < squareSideLength; position++)
-		            {
-						if (position == diamondTopPosition)
-							outputString.Append(letter);
-						else
-							outputString.Append(' ');
-					}
+					CreateTopRow(outputString, letter, squareSideLength, diamondTopPosition);
 				}	
 				else
 				{
-					for (int position = 0; position < squareSideLength; position++)
-					{
-						if (position == diamondTopPosition + i || position == diamondTopPosition - i)
-							outputString.Append(letter);
-						else
-							outputString.Append(' ');
-					}
+					CreateTopOfDiamondNonARows(outputString, letter, squareSideLength, diamondTopPosition, rowNumber);
 				}
 				outputString.Append('\n');
+			}
+		}
+		
+		private static void CreateTopOfDiamondNonARows(StringBuilder outputString, char letter, int squareSideLength, int diamondTopPosition, int rowNumber)
+		{
+			for (int position = 0; position < squareSideLength; position++)
+			{
+				if (position == diamondTopPosition + rowNumber || position == diamondTopPosition - rowNumber)
+					outputString.Append(letter);
+				else
+					outputString.Append(' ');
+			}
+		}
+
+		private static void CreateTopRow(StringBuilder outputString, char letter, int squareSideLength, int diamondTopPosition)
+		{
+			for (int position = 0; position < squareSideLength; position++)
+			{
+				if (position == diamondTopPosition)
+					outputString.Append(letter);
+				else
+					outputString.Append(' ');
 			}
 		}
 
