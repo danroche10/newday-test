@@ -15,18 +15,18 @@ namespace Diamond.Tests
 			string expectedOutput = "A";
 			Assert.Equal(expectedOutput, output);
 		}
-	
-        [Fact]
-		public void B_should_give_correct_character_sequence()
+		
+		[Fact]
+		public void B_should_have_characters_repeated_in_correct_order()
 		{
-			//Arrange
+			// Arrange
 			char input = 'B';
-
-	        // Act
-			string output = Diamond.Create(input);
+			
+			// Act
+        	string output = Diamond.Create(input);
 
 			// Assert
-			string expectedOutput = "AB";
+			string expectedOutput = "ABBA";
 			Assert.Equal(expectedOutput, output);
 		}
 	}
