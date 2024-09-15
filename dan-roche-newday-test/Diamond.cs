@@ -12,12 +12,20 @@ namespace Diamond
 			for (int i = 0; i < inputCharacterAlphabestPosition; i++) 
 			{
 				char letter = char.ToUpper((char)('a' + i));
+
+				if (outputString.Length > 0 && letter != outputString[i - 1])
+					outputString.Append('\n');
+
 				outputString.Append(letter);
             }
 			
 			for (int i = inputCharacterAlphabestPosition - 1; i >= 0; i--)
 			{
 				char letter = char.ToUpper((char)('a' + i));
+
+				if (i < inputCharacterAlphabestPosition - 1 && letter != outputString[i + 1])
+					outputString.Append("\n");
+
 				outputString.Append(letter);
 			}
 

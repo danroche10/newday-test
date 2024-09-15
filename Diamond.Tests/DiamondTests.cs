@@ -17,7 +17,7 @@ namespace Diamond.Tests
 		}
 		
 		[Fact]
-		public void B_should_have_characters_repeated_in_correct_order()
+		public void B_should_have_characters_repeated_in_correct_order_and_separate_lines()
 		{
 			// Arrange
 			char input = 'B';
@@ -26,7 +26,7 @@ namespace Diamond.Tests
         	string output = Diamond.Create(input);
 
 			// Assert
-			string expectedOutput = "ABBA";
+			string expectedOutput = "A\nBB\nA";
 			Assert.Equal(expectedOutput, output);
 		}
 	}
