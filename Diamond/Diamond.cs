@@ -30,6 +30,7 @@ namespace Diamond
 				int middlePosition = diamondWidth / 2;
 			
 				AppendDiamondRow(diamond, currentChar, middlePosition - row, middlePosition + row, diamondWidth);
+				
 				diamond.Append('\n');
 			}
 		}
