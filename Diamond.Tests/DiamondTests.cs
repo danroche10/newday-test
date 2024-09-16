@@ -4,21 +4,6 @@ namespace Diamond.Tests
 {
 	public class DiamondTests
 	{
-		[Fact]
-		public void A_should_return_only_A()
-		{
-			// Arrange
-			char input = 'A';
-
-			// Act
-			string output = Diamond.Create(input);
-
-			// Assert
-			string expectedOutput = "A";
-			Assert.Equal(expectedOutput, output);
-		}
-
-
 		[Theory]
 		[InlineData('A', "A")]
 		[InlineData('B', " A \nB B\n A ")]
