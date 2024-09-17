@@ -12,7 +12,7 @@ namespace Diamond
 			if (targetLetter == 'A')
 				return "A";
 			
-			int letterPosition = char.ToUpper(targetLetter) - 'A';
+			int letterPosition = targetLetter - 'A';
 			int diamondWidth = (letterPosition * 2) + 1;
 			StringBuilder diamond = new StringBuilder();
 
